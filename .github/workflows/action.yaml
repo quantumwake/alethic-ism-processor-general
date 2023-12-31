@@ -70,3 +70,11 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+
+    - name: Push container image to Docker Hub Container Registry
+      id: push_docker_image
+      run: |
+        echo "Pushing container file with tag $TAG and $TAG_LATEST"
+        docker push $TAG
+        docker push $TAG_LATEST
