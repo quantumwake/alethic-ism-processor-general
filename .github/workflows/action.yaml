@@ -24,9 +24,11 @@ jobs:
       run: |
         COMMIT_ID=$(echo $GITHUB_SHA | head -c7)
         TAG="krasaee/alethic-ism-processor-general:$COMMIT_ID"
+        TAG_LATEST="krasaee/alethic-ism-processor-general:latest"
 
         echo "COMMIT_ID=$COMMIT_ID" >> "$GITHUB_ENV" # for local variables
         echo "TAG=$TAG" >> "$GITHUB_ENV" # for local variables
+        echo "TAG_LATEST=$TAG_LATEST" >> "$GITHUB_ENV" # for local variables
 
     - name: Build container image
       id: build_docker_image
@@ -56,10 +58,11 @@ jobs:
 
         # build the docker image
         echo "Building with the fully qualified registry tag $TAG"
-        ./docker_build.sh $TAG
+        ./docker_build.sh $TAG $TAG_LATEST
   
         # pass the tag to the next step
         echo "TAG=$TAG" >> "$GITHUB_ENV" # for local variables
+        echo "TAG_LATEST=$TAG_LATEST" >> "$GITHUB_ENV" # for local variables
 
     - name: Login to Docker Hub
       id: dockerhub_login
