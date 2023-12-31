@@ -1,4 +1,4 @@
-name: Docker Image CI for Anthropic Processor (Consumer)
+name: Docker Image CI for Alethic ISM Processor General
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
 
     steps:
 
-    - name: Checkout Processor Code
+    - name: Checkout General Processor Code
       id: code_checkout
       uses: actions/checkout@v3
 
@@ -67,9 +67,3 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-    - name: Push container image to Docker Hub Container Registry
-      id: push_docker_image
-      run: |
-        echo "Pushing container file with tag $TAG"
-        docker push $TAG
